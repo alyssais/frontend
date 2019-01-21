@@ -1,21 +1,20 @@
+/* @flow */
 /* global module */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 
 import Favorite from '../../../app/components/icons/Favorite';
 
+type Props = { favorited: boolean };
+
 // Make a real button so we can test what it's really like
 class FavoriteButton extends React.Component {
-  static propTypes = {
-    favorited: PropTypes.bool.isRequired
-  };
-
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = { favorited: props.favorited };
   }
+  props: Props;
   shouldComponentUpdate() { return true; }
   render() {
     return (

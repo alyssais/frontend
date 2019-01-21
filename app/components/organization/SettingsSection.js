@@ -1,15 +1,17 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 
 import PageWithMenu from 'app/components/shared/PageWithMenu';
 import SettingsMenu from './SettingsMenu';
 
+type Props = {
+  organization: Object,
+  children: number | string | React.Element | Array<any>
+};
+
 class SettingsSection extends React.PureComponent {
-  static propTypes = {
-    organization: PropTypes.object.isRequired,
-    children: PropTypes.node.isRequired
-  };
+  props: Props;
 
   render() {
     return (

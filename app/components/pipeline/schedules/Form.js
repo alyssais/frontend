@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 
 import FormCheckbox from 'app/components/shared/FormCheckbox';
@@ -7,20 +7,20 @@ import FormTextField from 'app/components/shared/FormTextField';
 import FormTextarea from 'app/components/shared/FormTextarea';
 import ValidationErrors from 'app/lib/ValidationErrors';
 
+type Props = {
+  cronline?: string,
+  label?: string,
+  commit?: string,
+  branch?: string,
+  message?: string,
+  enabled?: boolean,
+  env?: string,
+  errors?: Array<any>,
+  pipeline: { defaultBranch: string }
+};
+
 class Form extends React.Component {
-  static propTypes = {
-    cronline: PropTypes.string,
-    label: PropTypes.string,
-    commit: PropTypes.string,
-    branch: PropTypes.string,
-    message: PropTypes.string,
-    enabled: PropTypes.bool,
-    env: PropTypes.string,
-    errors: PropTypes.array,
-    pipeline: PropTypes.shape({
-      defaultBranch: PropTypes.string.isRequired
-    }).isRequired
-  };
+  props: Props;
 
   static defaultProps = {
     enabled: true

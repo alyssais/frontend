@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import FormInputLabel from 'app/components/shared/FormInputLabel';
 import FormInputHelp from 'app/components/shared/FormInputHelp';
@@ -17,18 +17,16 @@ const filterAllowedTeams = (connection) => {
   return teams;
 };
 
-class PipelineNewTeams extends React.Component {
-  static propTypes = {
-    organization: PropTypes.object.isRequired
-  };
+type Props = { organization: Object };
 
+class PipelineNewTeams extends React.Component {
   state = {
     teams: [],
     errors: [],
     required: false
   };
 
-  constructor(initialProps) {
+  constructor(initialProps: Props) {
     super(initialProps);
 
     // Super hacky way of pre-populating the state from the browser. When the
@@ -47,6 +45,8 @@ class PipelineNewTeams extends React.Component {
       this.state = state;
     }
   }
+
+  props: Props;
 
   render() {
     // Collect all the teams that we're allowed to see pipelines on

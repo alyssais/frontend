@@ -1,35 +1,29 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import FormInputHelp from './FormInputHelp';
 import FormInputErrors from './FormInputErrors';
 import Badge from 'app/components/shared/Badge';
 
+type Props = {
+  options: Array<{
+    className?: string,
+    label: string,
+    help?: number | string | React.Element | Array<any>,
+    value: boolean | string
+  }>,
+  value?: boolean | string,
+  label?: string,
+  name?: string,
+  required?: boolean,
+  className?: string,
+  onChange: Function,
+  errors?: Array<any>
+};
+
 class FormRadioGroup extends React.Component {
-  static propTypes = {
-    options: PropTypes.arrayOf(
-      PropTypes.shape({
-        className: PropTypes.string,
-        label: PropTypes.string.isRequired,
-        help: PropTypes.node,
-        value: PropTypes.oneOfType([
-          PropTypes.bool,
-          PropTypes.string
-        ]).isRequired
-      })
-    ).isRequired,
-    value: PropTypes.oneOfType([
-      PropTypes.bool,
-      PropTypes.string
-    ]),
-    label: PropTypes.string,
-    name: PropTypes.string,
-    required: PropTypes.bool,
-    className: PropTypes.string,
-    onChange: PropTypes.func.isRequired,
-    errors: PropTypes.array
-  };
+  props: Props;
 
   render() {
     return (

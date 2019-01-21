@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import DocumentTitle from 'react-document-title';
 
@@ -12,28 +12,24 @@ import TeamLabels from './Labels';
 import Pipelines from './Pipelines';
 import Members from './Members';
 
+type Props = {
+  team?: {
+    name: string,
+    description?: string,
+    slug: string,
+    members: { count?: number },
+    pipelines: { count?: number },
+    organization: {
+      name: string,
+      slug: string
+    },
+    permissions: { teamUpdate: Object }
+  },
+  children: number | string | React.Element | Array<any>
+};
+
 class TeamShow extends React.Component {
-  static propTypes = {
-    team: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      description: PropTypes.string,
-      slug: PropTypes.string.isRequired,
-      members: PropTypes.shape({
-        count: PropTypes.number
-      }).isRequired,
-      pipelines: PropTypes.shape({
-        count: PropTypes.number
-      }).isRequired,
-      organization: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        slug: PropTypes.string.isRequired
-      }).isRequired,
-      permissions: PropTypes.shape({
-        teamUpdate: PropTypes.object.isRequired
-      }).isRequired
-    }),
-    children: PropTypes.node.isRequired
-  };
+  props: Props;
 
   static contextTypes = {
     router: PropTypes.object.isRequired

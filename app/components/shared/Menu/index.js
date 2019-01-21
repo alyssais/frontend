@@ -1,14 +1,14 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import Header from './header';
 import Button from './button';
 
+type Props = { children: number | string | React.Element | Array<any> };
+
 class Menu extends React.PureComponent {
-  static propTypes = {
-    children: PropTypes.node.isRequired
-  };
+  props: Props;
 
   render() {
     const children = React.Children.toArray(this.props.children);

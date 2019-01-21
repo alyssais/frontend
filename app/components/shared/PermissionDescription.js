@@ -1,13 +1,15 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Icon from './Icon';
 
+type Props = {
+  allowed: boolean,
+  permission: string
+};
+
 export default class PermissionDescription extends React.PureComponent {
-  static propTypes = {
-    allowed: PropTypes.bool.isRequired,
-    permission: PropTypes.string.isRequired
-  };
+  props: Props;
 
   render() {
     const { allowed, permission } = this.props;

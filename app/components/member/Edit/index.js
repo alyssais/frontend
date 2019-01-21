@@ -1,17 +1,19 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 
 import MemberEditForm from './form';
 import MemberEditRemove from './remove';
 
-class Edit extends React.PureComponent {
-  static displayName = "Member.Edit";
+type Props = {
+  organizationMember: Object,
+  viewer: Object
+};
 
-  static propTypes = {
-    organizationMember: PropTypes.object.isRequired,
-    viewer: PropTypes.object.isRequired
-  };
+class Edit extends React.PureComponent {
+  props: Props;
+
+  static displayName = "Member.Edit";
 
   render() {
     return (

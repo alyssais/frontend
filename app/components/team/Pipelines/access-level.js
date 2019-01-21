@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Chooser from 'app/components/shared/Chooser';
 import Dropdown from 'app/components/shared/Dropdown';
@@ -10,21 +10,19 @@ const MANAGE_BUILD_AND_READ = "MANAGE_BUILD_AND_READ";
 const BUILD_AND_READ = "BUILD_AND_READ";
 const READ_ONLY = "READ_ONLY";
 
-export default class AccessLevel extends React.PureComponent {
-  static displayName = "Team.Pipelines.AccessLevel";
+type Props = {
+  teamPipeline: {
+    accessLevel: string,
+    permissions?: { teamPipelineUpdate: { allowed: boolean } }
+  },
+  onAccessLevelChange: Function,
+  saving?: string
+};
 
-  static propTypes = {
-    teamPipeline: PropTypes.shape({
-      accessLevel: PropTypes.string.isRequired,
-      permissions: PropTypes.shape({
-        teamPipelineUpdate: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired
-        }).isRequired
-      })
-    }).isRequired,
-    onAccessLevelChange: PropTypes.func.isRequired,
-    saving: PropTypes.string
-  };
+export default class AccessLevel extends React.PureComponent {
+  props: Props;
+
+  static displayName = "Team.Pipelines.AccessLevel";
 
   render() {
     if (this.props.teamPipeline.permissions.teamPipelineUpdate.allowed) {

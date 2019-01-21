@@ -1,17 +1,19 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 
 import Panel from 'app/components/shared/Panel';
 import JobLink from 'app/components/shared/JobLink';
 import FriendlyTime from 'app/components/shared/FriendlyTime';
 
+type Props = {
+  job: Object,
+  onConcurrencyGroupClick?: Function,
+  onAgentQueryRuleClick?: Function
+};
+
 class Row extends React.PureComponent {
-  static propTypes = {
-    job: PropTypes.object.isRequired,
-    onConcurrencyGroupClick: PropTypes.func,
-    onAgentQueryRuleClick: PropTypes.func
-  };
+  props: Props;
 
   render() {
     return (

@@ -1,18 +1,20 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 let _collapsableFormFieldCounter = 0;
+
+type Props = {
+  label: string,
+  collapsed: boolean,
+  children: number | string | React.Element | Array<any>
+};
 
 // Legacy bootstap collapsable field
 //
 // This should be replaced with something more akin to CollapsableArea
 export default class CollapsableFormField extends React.PureComponent {
-  static propTypes = {
-    label: PropTypes.string.isRequired,
-    collapsed: PropTypes.bool.isRequired,
-    children: PropTypes.node.isRequired
-  };
+  props: Props;
 
   state = {
     id: "collapsable-form-" + (_collapsableFormFieldCounter += 1),

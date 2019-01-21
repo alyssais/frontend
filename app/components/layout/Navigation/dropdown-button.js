@@ -1,16 +1,18 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-export default class DropdownButton extends React.PureComponent {
-  static displayName = "Navigation.DropdownButton";
+type Props = {
+  style?: Object,
+  className?: string,
+  children?: number | string | React.Element | Array<any>,
+  onMouseEnter?: Function
+};
 
-  static propTypes = {
-    style: PropTypes.object,
-    className: PropTypes.string,
-    children: PropTypes.node,
-    onMouseEnter: PropTypes.func
-  };
+export default class DropdownButton extends React.PureComponent {
+  props: Props;
+
+  static displayName = "Navigation.DropdownButton";
 
   render() {
     return (

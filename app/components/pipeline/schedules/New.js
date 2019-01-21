@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import DocumentTitle from 'react-document-title';
 
@@ -11,16 +11,16 @@ import Button from 'app/components/shared/Button';
 
 import Form from './Form';
 
+type Props = {
+  pipeline: { name: string },
+  params: {
+    organization: string,
+    pipeline: string
+  }
+};
+
 class New extends React.Component {
-  static propTypes = {
-    pipeline: PropTypes.shape({
-      name: PropTypes.string.isRequired
-    }).isRequired,
-    params: PropTypes.shape({
-      organization: PropTypes.string.isRequired,
-      pipeline: PropTypes.string.isRequired
-    }).isRequired
-  };
+  props: Props;
 
   static contextTypes = {
     router: PropTypes.object.isRequired

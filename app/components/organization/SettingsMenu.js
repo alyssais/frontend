@@ -1,50 +1,32 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 
 import Menu from 'app/components/shared/Menu';
 import permissions from 'app/lib/permissions';
 
+type Props = {
+  organization?: {
+    name: string,
+    slug: string,
+    members?: { count: number },
+    invitations?: { count: number },
+    teams?: { count: number },
+    permissions?: {
+      organizationUpdate: { allowed: boolean },
+      organizationMemberView: { allowed: boolean },
+      teamView: { allowed: boolean },
+      teamEnabledChange: { allowed: boolean },
+      notificationServiceUpdate: { allowed: boolean },
+      organizationBillingUpdate: { allowed: boolean },
+      auditEventsView: { allowed: boolean }
+    }
+  },
+  relay: Object
+};
+
 class SettingsMenu extends React.Component {
-  static propTypes = {
-    organization: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired,
-      members: PropTypes.shape({
-        count: PropTypes.number.isRequired
-      }),
-      invitations: PropTypes.shape({
-        count: PropTypes.number.isRequired
-      }),
-      teams: PropTypes.shape({
-        count: PropTypes.number.isRequired
-      }),
-      permissions: PropTypes.shape({
-        organizationUpdate: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired
-        }).isRequired,
-        organizationMemberView: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired
-        }).isRequired,
-        teamView: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired
-        }).isRequired,
-        teamEnabledChange: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired
-        }).isRequired,
-        notificationServiceUpdate: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired
-        }).isRequired,
-        organizationBillingUpdate: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired
-        }).isRequired,
-        auditEventsView: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired
-        }).isRequired
-      })
-    }),
-    relay: PropTypes.object.isRequired
-  };
+  props: Props;
 
   componentDidMount() {
     this.props.relay.forceFetch({ isMounted: true });

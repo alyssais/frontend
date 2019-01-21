@@ -1,13 +1,15 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Icon from 'app/components/shared/Icon';
 
+type Props = {
+  value?: string,
+  onChange?: Function
+};
+
 export default class SearchInput extends React.PureComponent {
-  static propTypes = {
-    value: PropTypes.string,
-    onChange: PropTypes.func
-  };
+  props: Props;
 
   render() {
     return (

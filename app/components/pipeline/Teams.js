@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Chooser from 'app/components/shared/Chooser';
@@ -9,13 +9,15 @@ const PipelineChooser = styled(Chooser)`
   margin: -5px;
 `;
 
+type Props = {
+  organization: Object,
+  selected: Array<any>,
+  onTeamSelect: Function,
+  onTeamDeselect: Function
+};
+
 class PipelineTeams extends React.Component {
-  static propTypes = {
-    organization: PropTypes.object.isRequired,
-    selected: PropTypes.array.isRequired,
-    onTeamSelect: PropTypes.func.isRequired,
-    onTeamDeselect: PropTypes.func.isRequired
-  };
+  props: Props;
 
   state = {
     selected: this.props.selected

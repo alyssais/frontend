@@ -1,15 +1,17 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import parseEmoji from 'app/lib/parseEmoji';
 
+type Props = {
+  text?: string,
+  title?: string,
+  className?: string,
+  style?: Object
+};
+
 export default class Emojify extends React.PureComponent {
-  static propTypes = {
-    text: PropTypes.string,
-    title: PropTypes.string,
-    className: PropTypes.string,
-    style: PropTypes.object
-  };
+  props: Props;
 
   render() {
     const spanProps = {};

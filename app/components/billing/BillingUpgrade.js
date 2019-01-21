@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+/* @flow */
 import React from 'react';
 import Relay from 'react-relay/classic';
 import classNames from 'classnames';
@@ -14,14 +14,12 @@ import { createCardToken } from 'app/lib/credit-card';
 
 import BillingCreditCardForm from './BillingCreditCardForm';
 
-class BillingUpgrade extends React.Component {
-  static propTypes = {
-    organization: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired
-    }).isRequired
-  };
+type Props = { organization: {
+  name: string,
+  slug: string
+} };
 
+class BillingUpgrade extends React.Component {
   state = {
     saving: false,
     creditCardErrors: null,
@@ -29,7 +27,7 @@ class BillingUpgrade extends React.Component {
     interval: "monthly"
   }
 
-  constructor(initialProps) {
+  constructor(initialProps: Props) {
     super(initialProps);
 
     // We'll store credit card details here as they change
@@ -38,6 +36,8 @@ class BillingUpgrade extends React.Component {
     // Set default form state from data boostrapped on the page
     this.state = { form: window._billing["form"], summary: window._billing["summary"] };
   }
+
+  props: Props;
 
   render() {
     return (

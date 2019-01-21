@@ -1,14 +1,16 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
+type Props = {
+  label: number | string | React.Element | Array<any>,
+  children?: number | string | React.Element | Array<any>,
+  errors?: boolean,
+  required?: boolean
+};
+
 class FormInputLabel extends React.PureComponent {
-  static propTypes = {
-    label: PropTypes.node.isRequired,
-    children: PropTypes.node,
-    errors: PropTypes.bool,
-    required: PropTypes.bool
-  };
+  props: Props;
 
   render() {
     return (

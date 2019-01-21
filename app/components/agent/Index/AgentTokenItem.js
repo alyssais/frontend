@@ -1,21 +1,23 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import { createFragmentContainer, graphql } from 'react-relay/compat';
 
 import Badge from 'app/components/shared/Badge';
 import Panel from 'app/components/shared/Panel';
 import RevealButton from 'app/components/shared/RevealButton';
 
+type Props = {
+  agentToken: {
+    id: string,
+    description: string,
+    public: boolean,
+    token: string
+  },
+  showDescription?: boolean
+};
+
 class AgentTokenItem extends React.PureComponent {
-  static propTypes = {
-    agentToken: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      public: PropTypes.bool.isRequired,
-      token: PropTypes.string.isRequired
-    }).isRequired,
-    showDescription: PropTypes.bool
-  };
+  props: Props;
 
   render() {
     return (

@@ -1,24 +1,26 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import Icon from './Icon';
 import Spinner from './Spinner';
 
+type Props = {
+  className?: string,
+  style?: Object,
+  onChange: Function,
+  onKeyDown?: Function,
+  onFocus?: Function,
+  onBlur?: Function,
+  defaultValue?: string,
+  placeholder: string,
+  borderless: boolean,
+  searching: boolean,
+  autofocus: boolean
+};
+
 export default class SearchField extends React.PureComponent {
-  static propTypes = {
-    className: PropTypes.string,
-    style: PropTypes.object,
-    onChange: PropTypes.func.isRequired,
-    onKeyDown: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    defaultValue: PropTypes.string,
-    placeholder: PropTypes.string.isRequired,
-    borderless: PropTypes.bool.isRequired,
-    searching: PropTypes.bool.isRequired,
-    autofocus: PropTypes.bool.isRequired
-  };
+  props: Props;
 
   static defaultProps = {
     placeholder: 'Search…',

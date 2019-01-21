@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import SearchField from 'app/components/shared/SearchField';
 import Suggestion from './suggestion';
@@ -9,13 +9,15 @@ const KEYCODE_UP = 38;
 const KEYCODE_DOWN = 40;
 const KEYCODE_ENTER = 13;
 
+type Props = {
+  onSelect: Function,
+  onSearch: Function,
+  placeholder?: string,
+  items?: Array<any>
+};
+
 class AutocompleteField extends React.PureComponent {
-  static propTypes = {
-    onSelect: PropTypes.func.isRequired,
-    onSearch: PropTypes.func.isRequired,
-    placeholder: PropTypes.string,
-    items: PropTypes.array
-  };
+  props: Props;
 
   state = {
     searching: false,

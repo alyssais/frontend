@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 
 import Menu from 'app/components/shared/Menu';
@@ -7,10 +7,10 @@ import Menu from 'app/components/shared/Menu';
 import permissions from 'app/lib/permissions';
 import { repositoryProviderIcon } from 'app/lib/repositories';
 
+type Props = { pipeline: Object };
+
 class SettingsMenu extends React.Component {
-  static propTypes = {
-    pipeline: PropTypes.object.isRequired
-  };
+  props: Props;
 
   get provider() {
     return this.props.pipeline.repository.provider;

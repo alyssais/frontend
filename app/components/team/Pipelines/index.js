@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import { second } from 'metrick/duration';
 
@@ -19,19 +19,19 @@ import Row from './row';
 
 const PAGE_SIZE = 10;
 
-class Pipelines extends React.Component {
-  static displayName = "Team.Pipelines";
+type Props = {
+  team: { pipelines: {
+    count: number,
+    edges: Array<any>
+  } },
+  relay: Object,
+  className?: string
+};
 
-  static propTypes = {
-    team: PropTypes.shape({
-      pipelines: PropTypes.shape({
-        count: PropTypes.number.isRequired,
-        edges: PropTypes.array.isRequired
-      }).isRequired
-    }).isRequired,
-    relay: PropTypes.object.isRequired,
-    className: PropTypes.string
-  };
+class Pipelines extends React.Component {
+  props: Props;
+
+  static displayName = "Team.Pipelines";
 
   state = {
     loading: false,

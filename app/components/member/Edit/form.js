@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 
 import Button from 'app/components/shared/Button';
@@ -13,26 +13,18 @@ import OrganizationMemberUpdateMutation from 'app/mutations/OrganizationMemberUp
 import OrganizationMemberRoleConstants from 'app/constants/OrganizationMemberRoleConstants';
 import OrganizationMemberSSOModeConstants from 'app/constants/OrganizationMemberSSOModeConstants';
 
-class Form extends React.PureComponent {
-  static displayName = "Member.Edit.Form";
+type Props = { organizationMember?: {
+  role: string,
+  sso: { mode?: string },
+  permissions: Object,
+  user: { name: string },
+  organization: { ssoProviders: { count: number } }
+} };
 
-  static propTypes = {
-    organizationMember: PropTypes.shape({
-      role: PropTypes.string.isRequired,
-      sso: PropTypes.shape({
-        mode: PropTypes.string
-      }).isRequired,
-      permissions: PropTypes.object.isRequired,
-      user: PropTypes.shape({
-        name: PropTypes.string.isRequired
-      }).isRequired,
-      organization: PropTypes.shape({
-        ssoProviders: PropTypes.shape({
-          count: PropTypes.number.isRequired
-        }).isRequired
-      }).isRequired
-    })
-  };
+class Form extends React.PureComponent {
+  props: Props;
+
+  static displayName = "Member.Edit.Form";
 
   state = {
     role: null,

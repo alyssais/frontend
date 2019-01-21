@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 
 import Panel from 'app/components/shared/Panel';
@@ -10,23 +10,25 @@ import PageWithContainer from 'app/components/shared/PageWithContainer';
 import Jobs from './jobs';
 import SearchInput from './search-input';
 
-class JobIndex extends React.Component {
-  static propTypes = {
-    organization: PropTypes.object.isRequired,
-    location: PropTypes.object
-  };
+type Props = {
+  organization: Object,
+  location?: Object
+};
 
+class JobIndex extends React.Component {
   static contextTypes = {
     router: PropTypes.object.isRequired
   };
 
-  constructor(initialProps) {
+  constructor(initialProps: Props) {
     super(initialProps);
 
     // Figure out if the default query
     const query = this.props.location.query.q !== undefined ? this.props.location.query.q : "state:scheduled";
     this.state = { query: query, searchInputValue: query };
   }
+
+  props: Props;
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     // When the `q` param in the URL changes, do a new search

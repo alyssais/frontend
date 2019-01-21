@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import { second } from 'metrick/duration';
 import DocumentTitle from 'react-document-title';
@@ -28,26 +28,22 @@ const TEAM_PRIVACIES = [
 
 const PAGE_SIZE = 10;
 
+type Props = {
+  organization: {
+    name: string,
+    slug: string,
+    permissions: Object,
+    allTeams?: { count: number },
+    teams?: {
+      count: number,
+      edges: Array<{ node: Object }>
+    }
+  },
+  relay: Object
+};
+
 class TeamIndex extends React.PureComponent {
-  static propTypes = {
-    organization: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired,
-      permissions: PropTypes.object.isRequired,
-      allTeams: PropTypes.shape({
-        count: PropTypes.number.isRequired
-      }),
-      teams: PropTypes.shape({
-        count: PropTypes.number.isRequired,
-        edges: PropTypes.arrayOf(
-          PropTypes.shape({
-            node: PropTypes.object.isRequired
-          }).isRequired
-        ).isRequired
-      })
-    }).isRequired,
-    relay: PropTypes.object.isRequired
-  };
+  props: Props;
 
   state = {
     searchingTeams: false,

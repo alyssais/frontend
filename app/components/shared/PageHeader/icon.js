@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styled from 'styled-components';
 
@@ -10,12 +10,14 @@ const DivWithSlightRightMargin = styled('div').attrs({
   margin-right: 13px;
 `;
 
+type Props = {
+  children: number | string | React.Element | Array<any>,
+  className?: string
+};
+
 export default class Icon extends React.PureComponent {
+  props: Props;
   static displayName = 'PageHeader.Icon';
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    className: PropTypes.string
-  };
 
   render() {
     const { className, children } = this.props;

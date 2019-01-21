@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 
 import Panel from 'app/components/shared/Panel';
@@ -7,22 +7,18 @@ import Spinner from 'app/components/shared/Spinner';
 
 import AgentTokenItem from './AgentTokenItem';
 
+type Props = {
+  organization: {
+    agentTokens?: { edges: Array<any> },
+    permissions?: { agentTokenView: { allowed: boolean } }
+  },
+  relay: Object,
+  title: string,
+  setupMode?: boolean
+};
+
 class AgentTokenList extends React.Component {
-  static propTypes = {
-    organization: PropTypes.shape({
-      agentTokens: PropTypes.shape({
-        edges: PropTypes.array.isRequired
-      }),
-      permissions: PropTypes.shape({
-        agentTokenView: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired
-        }).isRequired
-      })
-    }).isRequired,
-    relay: PropTypes.object.isRequired,
-    title: PropTypes.string.isRequired,
-    setupMode: PropTypes.bool
-  };
+  props: Props;
 
   static defaultProps = {
     title: 'Agent Token',

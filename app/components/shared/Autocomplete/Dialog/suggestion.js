@@ -1,19 +1,21 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import Button from 'app/components/shared/Button';
 
-export default class Suggestion extends React.PureComponent {
-  static displayName = "AutocompleteDialog.Suggestion";
+type Props = {
+  children: number | string | React.Element | Array<any>,
+  suggestion: Object,
+  onSelect: Function,
+  selectLabel: string,
+  className?: string
+};
 
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    suggestion: PropTypes.object.isRequired,
-    onSelect: PropTypes.func.isRequired,
-    selectLabel: PropTypes.string.isRequired,
-    className: PropTypes.string
-  };
+export default class Suggestion extends React.PureComponent {
+  props: Props;
+
+  static displayName = "AutocompleteDialog.Suggestion";
 
   static defaultProps = {
     selectLabel: "Select"

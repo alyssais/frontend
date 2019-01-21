@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import DocumentTitle from 'react-document-title';
 
@@ -9,31 +9,23 @@ import permissions from 'app/lib/permissions';
 
 import Row from './row';
 
+type Props = {
+  pipeline: {
+    name: string,
+    schedules: { edges?: Array<{ node: {
+      id: string,
+      failedAt?: string
+    } }> },
+    permissions: { pipelineScheduleCreate: { allowed: boolean } }
+  },
+  params: {
+    organization: string,
+    pipeline: string
+  }
+};
+
 class Index extends React.Component {
-  static propTypes = {
-    pipeline: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      schedules: PropTypes.shape({
-        edges: PropTypes.arrayOf(
-          PropTypes.shape({
-            node: PropTypes.shape({
-              id: PropTypes.string.isRequired,
-              failedAt: PropTypes.string
-            }).isRequired
-          }).isRequired
-        )
-      }).isRequired,
-      permissions: PropTypes.shape({
-        pipelineScheduleCreate: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired
-        }).isRequired
-      }).isRequired
-    }).isRequired,
-    params: PropTypes.shape({
-      organization: PropTypes.string.isRequired,
-      pipeline: PropTypes.string.isRequired
-    }).isRequired
-  };
+  props: Props;
 
   render() {
     return (

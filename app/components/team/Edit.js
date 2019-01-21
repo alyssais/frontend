@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 
 import Panel from 'app/components/shared/Panel';
@@ -11,22 +11,22 @@ import TeamUpdateMutation from 'app/mutations/TeamUpdate';
 import GraphQLErrors from 'app/constants/GraphQLErrors';
 import FlashesStore from 'app/stores/FlashesStore';
 
+type Props = { team: {
+  name: string,
+  slug: string,
+  uuid: string,
+  description?: string,
+  privacy: string,
+  isDefaultTeam: boolean,
+  defaultMemberRole: string,
+  organization: {
+    name: string,
+    slug: string
+  }
+} };
+
 class TeamEdit extends React.Component {
-  static propTypes = {
-    team: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired,
-      uuid: PropTypes.string.isRequired,
-      description: PropTypes.string,
-      privacy: PropTypes.string.isRequired,
-      isDefaultTeam: PropTypes.bool.isRequired,
-      defaultMemberRole: PropTypes.string.isRequired,
-      organization: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        slug: PropTypes.string.isRequired
-      }).isRequired
-    }).isRequired
-  };
+  props: Props;
 
   static contextTypes = {
     router: PropTypes.object.isRequired

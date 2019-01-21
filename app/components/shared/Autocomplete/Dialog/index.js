@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Dialog from 'app/components/shared/Dialog';
 import SearchField from 'app/components/shared/SearchField';
@@ -7,17 +7,19 @@ import Suggestion from './suggestion';
 import ErrorMessage from 'app/components/shared/Autocomplete/error-message';
 import Loader from 'app/components/shared/Autocomplete/loader';
 
+type Props = {
+  isOpen: boolean,
+  onRequestClose: Function,
+  width?: number,
+  onSelect: Function,
+  onSearch: Function,
+  placeholder?: string,
+  selectLabel?: string,
+  items?: Array<any>
+};
+
 class AutocompleteDialog extends React.PureComponent {
-  static propTypes = {
-    isOpen: PropTypes.bool.isRequired,
-    onRequestClose: PropTypes.func.isRequired,
-    width: PropTypes.number,
-    onSelect: PropTypes.func.isRequired,
-    onSearch: PropTypes.func.isRequired,
-    placeholder: PropTypes.string,
-    selectLabel: PropTypes.string,
-    items: PropTypes.array
-  };
+  props: Props;
 
   state = {
     searching: false

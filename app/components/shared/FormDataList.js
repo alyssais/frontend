@@ -1,11 +1,13 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
+
+type Props = {
+  id: number | string | React.Element | Array<any>,
+  values?: Array<string>
+};
 
 class FormDataList extends React.PureComponent {
-  static propTypes = {
-    id: PropTypes.node.isRequired,
-    values: PropTypes.arrayOf(PropTypes.string.isRequired)
-  };
+  props: Props;
 
   render() {
     return (

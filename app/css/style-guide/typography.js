@@ -1,12 +1,17 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
+export type ExampleProps = { children?: number | string | React.Element | Array<any> };
 
-const Example = function(props) {
+const Example = function(props: ExampleProps) {
   return <div className="my3 border-left border-gray pl4 py2">{props.children}</div>;
 };
-Example.propTypes = { children: PropTypes.node };
 
-const Section = function(props) {
+export type SectionProps = {
+  title?: string,
+  children?: number | string | React.Element | Array<any>
+};
+
+const Section = function(props: SectionProps) {
   return (
     <div className="max-width-2 my4 pt1">
       <hr className="col-1 ml0 mt2 border border-lime" />
@@ -15,9 +20,10 @@ const Section = function(props) {
     </div>
   );
 };
-Section.propTypes = { title: PropTypes.string, children: PropTypes.node };
+type Props = {};
 
 export default class Typography extends React.PureComponent {
+  props: Props;
   render() {
     return (
       <div>

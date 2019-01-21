@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 
 import Dropdown from 'app/components/shared/Dropdown';
@@ -7,12 +7,14 @@ import Chooser from 'app/components/shared/Chooser';
 import Emojify from 'app/components/shared/Emojify';
 import Icon from 'app/components/shared/Icon';
 
+type Props = {
+  selected?: string,
+  organization: Object,
+  onTeamChange: Function
+};
+
 class Teams extends React.Component {
-  static propTypes = {
-    selected: PropTypes.string,
-    organization: PropTypes.object.isRequired,
-    onTeamChange: PropTypes.func.isRequired
-  };
+  props: Props;
 
   render() {
     // Collect all the teams that we're allowed to see pipelines on

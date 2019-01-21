@@ -1,8 +1,14 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const FormInputErrors = ({ className, errors, ...props }) => {
+export type Props = {
+  className?: string,
+  errors?: Array<number | string | React.Element | Array<any>>
+};
+
+const FormInputErrors = (props: Props) => {
+  const { className, errors, ...props } = props;
   if (errors.length < 1) {
     return null;
   }
@@ -23,11 +29,6 @@ const FormInputErrors = ({ className, errors, ...props }) => {
       )}
     </p>
   );
-};
-
-FormInputErrors.propTypes = {
-  className: PropTypes.string,
-  errors: PropTypes.arrayOf(PropTypes.node.isRequired)
 };
 
 FormInputErrors.defaultProps = {

@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import { seconds } from 'metrick/duration';
 import Confetti from 'react-confetti';
@@ -9,16 +9,16 @@ import Dialog from 'app/components/shared/Dialog';
 import Emojify from 'app/components/shared/Emojify';
 import Panel from 'app/components/shared/Panel';
 
+type Props = {
+  organization: { agents?: {
+    count: number,
+    edges: Array<any>
+  } },
+  relay: Object
+};
+
 class AgentInstallation extends React.PureComponent {
-  static propTypes = {
-    organization: PropTypes.shape({
-      agents: PropTypes.shape({
-        count: PropTypes.number.isRequired,
-        edges: PropTypes.array.isRequired
-      })
-    }).isRequired,
-    relay: PropTypes.object.isRequired
-  };
+  props: Props;
 
   state = {
     isDialogOpen: false

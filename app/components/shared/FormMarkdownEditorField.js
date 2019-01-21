@@ -1,20 +1,22 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import autosize from 'autosize';
 import MarkdownEditor from 'app/lib/MarkdownEditor';
 import AssetUploader from 'app/lib/AssetUploader';
 import Button from 'app/components/shared/Button';
 
+type Props = {
+  id?: string,
+  name?: string,
+  value?: string,
+  placeholder?: string,
+  rows?: number,
+  onChange?: Function
+};
+
 class FormMarkdownEditorField extends React.Component {
-  static propTypes = {
-    id: PropTypes.string,
-    name: PropTypes.string,
-    value: PropTypes.string,
-    placeholder: PropTypes.string,
-    rows: PropTypes.number,
-    onChange: PropTypes.func
-  };
+  props: Props;
 
   state = {
     draggingFile: false

@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import Spinner from 'app/components/shared/Spinner';
@@ -7,7 +7,15 @@ import Icon from 'app/components/shared/Icon';
 
 import Option from './option';
 
-function SelectOption(props) {
+export type SelectOptionProps = {
+  value: string,
+  label: string,
+  description: number | string | React.Element | Array<any>,
+  saving?: boolean,
+  selected?: boolean
+};
+
+function SelectOption(props: SelectOptionProps) {
   return (
     <Option value={props.value} className={classNames("btn block hover-bg-silver", { "bg-silver": props.selected })}>
       <div className="flex items-top">
@@ -25,15 +33,12 @@ function SelectOption(props) {
 
 SelectOption.displayName = "Chooser.SelectOption";
 
-SelectOption.propTypes = {
-  value: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  description: PropTypes.node.isRequired,
-  saving: PropTypes.bool,
-  selected: PropTypes.bool
+export type SelectIconProps = {
+  saving: boolean,
+  selected: boolean
 };
 
-function SelectIcon(props) {
+function SelectIcon(props: SelectIconProps) {
   const size = 25;
 
   if (props.saving) {
@@ -50,10 +55,5 @@ function SelectIcon(props) {
     <Icon icon="permission-small-tick" className={classNames(tickColor, "relative")} style={{ width: size, height: size, top: -3, left: -2 }} />
   );
 }
-
-SelectIcon.propTypes = {
-  saving: PropTypes.bool.isRequired,
-  selected: PropTypes.bool.isRequired
-};
 
 export default SelectOption;

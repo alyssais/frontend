@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 
 import Panel from 'app/components/shared/Panel';
@@ -11,30 +11,22 @@ import Chooser from './chooser';
 const INITIAL_PAGE_SIZE = 5;
 const PAGE_SIZE = 20;
 
-class TeamMemberships extends React.PureComponent {
-  static displayName = "Member.Teams";
+type Props = {
+  organizationMember?: {
+    uuid: string,
+    organization: { permissions: { teamAdmin: { allowed: boolean } } },
+    teams: {
+      count: number,
+      edges: Array<{ node: Object }>
+    }
+  },
+  relay: Object
+};
 
-  static propTypes = {
-    organizationMember: PropTypes.shape({
-      uuid: PropTypes.string.isRequired,
-      organization: PropTypes.shape({
-        permissions: PropTypes.shape({
-          teamAdmin: PropTypes.shape({
-            allowed: PropTypes.bool.isRequired
-          }).isRequired
-        }).isRequired
-      }).isRequired,
-      teams: PropTypes.shape({
-        count: PropTypes.number.isRequired,
-        edges: PropTypes.arrayOf(
-          PropTypes.shape({
-            node: PropTypes.object.isRequired
-          }).isRequired
-        ).isRequired
-      }).isRequired
-    }),
-    relay: PropTypes.object.isRequired
-  };
+class TeamMemberships extends React.PureComponent {
+  props: Props;
+
+  static displayName = "Member.Teams";
 
   state = {
     loading: false

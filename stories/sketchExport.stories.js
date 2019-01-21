@@ -1,13 +1,15 @@
+/* @flow */
 /* global module */
 
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import { storiesOf } from '@storybook/react';
 
-const Export = ({ sketch }) => (
-  <div className="my4">{sketch()}</div>
-);
-Export.propTypes = { sketch: PropTypes.func.isRequired };
+export type Props = { sketch: Function };
+
+const Export = (props: Props) => {
+  const { sketch } = props;
+  return <div className="my4">{sketch()}</div>;
+};
 
 storiesOf('Sketch', module)
   .add('Export', () => (

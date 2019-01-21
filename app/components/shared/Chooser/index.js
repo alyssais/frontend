@@ -1,17 +1,19 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Option from './option';
 import SelectOption from './select-option';
 
+type Props = {
+  children: number | string | React.Element | Array<any>,
+  className?: string,
+  multiple?: boolean,
+  selected?: any,
+  onSelect: Function
+};
+
 class Chooser extends React.Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    className: PropTypes.string,
-    multiple: PropTypes.bool,
-    selected: PropTypes.any,
-    onSelect: PropTypes.func.isRequired
-  };
+  props: Props;
 
   static childContextTypes = {
     chooser: PropTypes.object.isRequired

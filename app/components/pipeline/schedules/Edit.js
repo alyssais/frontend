@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import DocumentTitle from 'react-document-title';
 
@@ -11,25 +11,23 @@ import Button from 'app/components/shared/Button';
 
 import Form from './Form';
 
+type Props = { pipelineSchedule: {
+  uuid: string,
+  cronline: string,
+  label?: string,
+  commit?: string,
+  branch?: string,
+  message?: string,
+  enabled: boolean,
+  env?: Array<string>,
+  pipeline: {
+    slug: string,
+    organization: { slug: string }
+  }
+} };
+
 class Edit extends React.Component {
-  static propTypes = {
-    pipelineSchedule: PropTypes.shape({
-      uuid: PropTypes.string.isRequired,
-      cronline: PropTypes.string.isRequired,
-      label: PropTypes.string,
-      commit: PropTypes.string,
-      branch: PropTypes.string,
-      message: PropTypes.string,
-      enabled: PropTypes.bool.isRequired,
-      env: PropTypes.arrayOf(PropTypes.string),
-      pipeline: PropTypes.shape({
-        slug: PropTypes.string.isRequired,
-        organization: PropTypes.shape({
-          slug: PropTypes.string.isRequired
-        }).isRequired
-      }).isRequired
-    }).isRequired
-  };
+  props: Props;
 
   static contextTypes = {
     router: PropTypes.object.isRequired

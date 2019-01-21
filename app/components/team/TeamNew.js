@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import { QueryRenderer, createFragmentContainer, graphql, commitMutation } from 'react-relay/compat';
 import DocumentTitle from 'react-document-title';
 import Environment from 'app/lib/relay/environment';
@@ -12,21 +12,21 @@ import GraphQLErrors from 'app/constants/GraphQLErrors';
 import TeamMemberRoleConstants from 'app/constants/TeamMemberRoleConstants';
 import TeamPrivacyConstants from 'app/constants/TeamPrivacyConstants';
 
+type TeamNewProps = {
+  organization: {
+    id: string,
+    name: string,
+    slug: string,
+    permissions?: { teamCreate?: {
+      allowed: boolean,
+      message?: string
+    } }
+  },
+  relay: Object
+};
+
 class TeamNew extends React.Component {
-  static propTypes = {
-    organization: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired,
-      permissions: PropTypes.shape({
-        teamCreate: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired,
-          message: PropTypes.string
-        })
-      })
-    }).isRequired,
-    relay: PropTypes.object.isRequired
-  };
+  props: TeamNewProps;
 
   static contextTypes = {
     router: PropTypes.object.isRequired
@@ -180,17 +180,13 @@ const TeamNewContainerQuery = graphql`
   }
 `;
 
+type TeamNewQueryContainerProps = { params: { organization: string } };
+
 /* eslint-disable react/no-multi-comp */
 export default class TeamNewQueryContainer extends React.PureComponent {
-  static propTypes = {
-    params: PropTypes.shape({
-      organization: PropTypes.string.isRequired
-    }).isRequired
-  };
-
   environment = Environment.get();
 
-  constructor(props) {
+  constructor(props: TeamNewQueryContainerProps) {
     super(props);
 
     RelayModernPreloader.preload({
@@ -199,6 +195,8 @@ export default class TeamNewQueryContainer extends React.PureComponent {
       environment: this.environment
     });
   }
+
+  props: TeamNewQueryContainerProps;
 
   get variables() {
     return {

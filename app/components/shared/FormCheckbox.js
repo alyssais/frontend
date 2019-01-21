@@ -1,21 +1,23 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import FormInputErrors from './FormInputErrors';
 import FormInputHelp from './FormInputHelp';
 
+type Props = {
+  label: number | string | React.Element | Array<any>,
+  name?: string,
+  defaultChecked?: boolean,
+  checked?: boolean,
+  help?: number | string | React.Element | Array<any>,
+  disabled?: boolean,
+  onChange?: Function,
+  errors?: Array<any>
+};
+
 export default class FormCheckbox extends React.PureComponent {
-  static propTypes = {
-    label: PropTypes.node.isRequired,
-    name: PropTypes.string,
-    defaultChecked: PropTypes.bool,
-    checked: PropTypes.bool,
-    help: PropTypes.node,
-    disabled: PropTypes.bool,
-    onChange: PropTypes.func,
-    errors: PropTypes.array
-  };
+  props: Props;
 
   render() {
     return (

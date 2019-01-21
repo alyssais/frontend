@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import { Link } from 'react-router';
 import moment from 'moment';
@@ -39,28 +39,26 @@ const ExtrasTable = styled.table`
   }
 `;
 
+type Props = {
+  agent?: {
+    uuid?: string,
+    name?: string,
+    connectionState?: string,
+    disconnectedAt?: string,
+    stoppedAt?: string,
+    job?: Object,
+    permissions?: { agentStop?: { allowed?: boolean } },
+    organization?: {
+      name?: string,
+      slug?: string
+    },
+    public: boolean
+  },
+  relay: Object
+};
+
 class AgentShow extends React.Component {
-  static propTypes = {
-    agent: PropTypes.shape({
-      uuid: PropTypes.string,
-      name: PropTypes.string,
-      connectionState: PropTypes.string,
-      disconnectedAt: PropTypes.string,
-      stoppedAt: PropTypes.string,
-      job: PropTypes.object,
-      permissions: PropTypes.shape({
-        agentStop: PropTypes.shape({
-          allowed: PropTypes.bool
-        })
-      }),
-      organization: PropTypes.shape({
-        name: PropTypes.string,
-        slug: PropTypes.string
-      }),
-      public: PropTypes.bool.isRequired
-    }),
-    relay: PropTypes.object.isRequired
-  };
+  props: Props;
 
   state = {
     stopping: false,

@@ -1,20 +1,20 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 
 import TeamLabels from 'app/components/team/Labels';
 import Emojify from 'app/components/shared/Emojify';
 
-class TeamSuggestion extends React.PureComponent {
-  static displayName = "Pipeline.Teams.TeamSuggestion";
+type Props = { team: {
+  name: string,
+  description: string,
+  slug: string
+} };
 
-  static propTypes = {
-    team: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired
-    }).isRequired
-  };
+class TeamSuggestion extends React.PureComponent {
+  props: Props;
+
+  static displayName = "Pipeline.Teams.TeamSuggestion";
 
   render() {
     return (

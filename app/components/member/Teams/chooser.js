@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import shallowCompare from 'react-addons-shallow-compare';
 
@@ -10,25 +10,23 @@ import FlashesStore from 'app/stores/FlashesStore';
 
 import Team from './team';
 
-class Chooser extends React.Component {
-  static displayName = "Member.Edit.TeamMemberships.Chooser";
+type Props = {
+  organizationMember: {
+    id: string,
+    user: {
+      id: string,
+      uuid: string
+    },
+    organization: { teams?: { edges: Array<any> } }
+  },
+  relay: Object,
+  onChoose: Function
+};
 
-  static propTypes = {
-    organizationMember: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      user: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        uuid: PropTypes.string.isRequired
-      }).isRequired,
-      organization: PropTypes.shape({
-        teams: PropTypes.shape({
-          edges: PropTypes.array.isRequired
-        })
-      }).isRequired
-    }).isRequired,
-    relay: PropTypes.object.isRequired,
-    onChoose: PropTypes.func.isRequired
-  };
+class Chooser extends React.Component {
+  props: Props;
+
+  static displayName = "Member.Edit.TeamMemberships.Chooser";
 
   state = {
     loading: false,

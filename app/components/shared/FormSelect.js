@@ -1,29 +1,29 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import FormInputLabel from './FormInputLabel';
 import FormInputHelp from './FormInputHelp';
 import FormInputErrors from './FormInputErrors';
 
+type Props = {
+  options: Array<{
+    label: string,
+    value: string
+  }>,
+  value?: string,
+  label?: string,
+  name?: string,
+  help?: number | string | React.Element | Array<any>,
+  className?: string,
+  onChange?: Function,
+  errors?: Array<any>,
+  required?: boolean,
+  disabled?: boolean
+};
+
 class FormSelect extends React.Component {
-  static propTypes = {
-    options: PropTypes.arrayOf(
-      PropTypes.shape({
-        label: PropTypes.string.isRequired,
-        value: PropTypes.string.isRequired
-      })
-    ).isRequired,
-    value: PropTypes.string,
-    label: PropTypes.string,
-    name: PropTypes.string,
-    help: PropTypes.node,
-    className: PropTypes.string,
-    onChange: PropTypes.func,
-    errors: PropTypes.array,
-    required: PropTypes.bool,
-    disabled: PropTypes.bool
-  };
+  props: Props;
 
   render() {
     return (

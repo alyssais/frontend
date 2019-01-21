@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import throttle from 'throttleit';
 import { seconds } from 'metrick/duration';
@@ -14,15 +14,13 @@ import { formatNumber } from 'app/lib/number';
 // given time window. I wish this was cleaner, kid, I really do.
 const requestUpdate = throttle((callback) => callback(), 3::seconds);
 
+type Props = {
+  organization?: { agents?: { count: number } },
+  relay: Object
+};
+
 class AgentsCount extends React.PureComponent {
-  static propTypes = {
-    organization: PropTypes.shape({
-      agents: PropTypes.shape({
-        count: PropTypes.number.isRequired
-      })
-    }),
-    relay: PropTypes.object.isRequired
-  };
+  props: Props;
 
   state = {
     agentCount: this.props.organization.agents ? this.props.organization.agents.count : 0

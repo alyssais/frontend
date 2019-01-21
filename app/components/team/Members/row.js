@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 
 import Panel from 'app/components/shared/Panel';
@@ -18,26 +18,24 @@ import TeamMemberDeleteMutation from 'app/mutations/TeamMemberDelete';
 import User from 'app/components/shared/User';
 import Role from './role';
 
-class Row extends React.PureComponent {
-  static displayName = "Team.Members.Row";
+type Props = {
+  teamMember: {
+    user: Object,
+    role: string,
+    permissions?: {
+      teamMemberUpdate: { allowed: boolean },
+      teamMemberDelete: { allowed: boolean }
+    }
+  },
+  onRemoveClick: Function,
+  onRoleChange: Function,
+  relay: Object
+};
 
-  static propTypes = {
-    teamMember: PropTypes.shape({
-      user: PropTypes.object.isRequired,
-      role: PropTypes.string.isRequired,
-      permissions: PropTypes.shape({
-        teamMemberUpdate: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired
-        }).isRequired,
-        teamMemberDelete: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired
-        }).isRequired
-      })
-    }).isRequired,
-    onRemoveClick: PropTypes.func.isRequired,
-    onRoleChange: PropTypes.func.isRequired,
-    relay: PropTypes.object.isRequired
-  };
+class Row extends React.PureComponent {
+  props: Props;
+
+  static displayName = "Team.Members.Row";
 
   state = {
     removing: false,

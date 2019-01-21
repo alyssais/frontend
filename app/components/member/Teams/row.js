@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import { Link } from 'react-router';
 
@@ -18,38 +18,34 @@ import TeamMemberDeleteMutation from 'app/mutations/TeamMemberDelete';
 
 import TeamPrivacyConstants from 'app/constants/TeamPrivacyConstants';
 
-class Row extends React.PureComponent {
-  static displayName = "Member.Edit.TeamMemberships.Row";
+type Props = { teamMember: {
+  id: string,
+  role: string,
+  team: {
+    id: string,
+    name: string,
+    description?: string,
+    slug: string,
+    privacy: string,
+    organization: { slug: string },
+    pipelines: { count: number }
+  },
+  permissions?: {
+    teamMemberUpdate?: {
+      allowed: boolean,
+      message?: string
+    },
+    teamMemberDelete?: {
+      allowed: boolean,
+      message?: string
+    }
+  }
+} };
 
-  static propTypes = {
-    teamMember: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      role: PropTypes.string.isRequired,
-      team: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        description: PropTypes.string,
-        slug: PropTypes.string.isRequired,
-        privacy: PropTypes.string.isRequired,
-        organization: PropTypes.shape({
-          slug: PropTypes.string.isRequired
-        }).isRequired,
-        pipelines: PropTypes.shape({
-          count: PropTypes.number.isRequired
-        }).isRequired
-      }).isRequired,
-      permissions: PropTypes.shape({
-        teamMemberUpdate: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired,
-          message: PropTypes.string
-        }),
-        teamMemberDelete: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired,
-          message: PropTypes.string
-        })
-      })
-    }).isRequired
-  };
+class Row extends React.PureComponent {
+  props: Props;
+
+  static displayName = "Member.Edit.TeamMemberships.Row";
 
   state = {
     removing: null,

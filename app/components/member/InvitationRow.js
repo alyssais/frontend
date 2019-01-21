@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 
 import Button from 'app/components/shared/Button';
@@ -14,17 +14,15 @@ import OrganizationInvitationRevoke from 'app/mutations/OrganizationInvitationRe
 import OrganizationMemberRoleConstants from 'app/constants/OrganizationMemberRoleConstants';
 import OrganizationMemberSSOModeConstants from 'app/constants/OrganizationMemberSSOModeConstants';
 
+type Props = { organizationInvitation: {
+  uuid: string,
+  email: string,
+  role: string,
+  sso: { mode?: string }
+} };
+
 class InvitationRow extends React.PureComponent {
-  static propTypes = {
-    organizationInvitation: PropTypes.shape({
-      uuid: PropTypes.string.isRequired,
-      email: PropTypes.string.isRequired,
-      role: PropTypes.string.isRequired,
-      sso: PropTypes.shape({
-        mode: PropTypes.string
-      }).isRequired
-    }).isRequired
-  };
+  props: Props;
 
   state = {
     resending: false,

@@ -1,20 +1,22 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import { createFragmentContainer, graphql } from 'react-relay/compat';
 import Emojify from 'app/components/shared/Emojify';
 import TeamLabels from 'app/components/team/Labels';
 
+type Props = {
+  team: {
+    id: string,
+    uuid: string,
+    name: string,
+    description?: string
+  },
+  checked: boolean,
+  onChange: Function
+};
+
 class MemberTeamRow extends React.Component {
-  static propTypes = {
-    team: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      uuid: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      description: PropTypes.string
-    }).isRequired,
-    checked: PropTypes.bool.isRequired,
-    onChange: PropTypes.func.isRequired
-  };
+  props: Props;
 
   render() {
     return (

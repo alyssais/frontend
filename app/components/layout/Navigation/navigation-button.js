@@ -1,19 +1,21 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Link } from 'react-router';
 
-export default class NavigationButton extends React.PureComponent {
-  static displayName = "Navigation.NavigationButton";
+type Props = {
+  style?: Object,
+  className?: string,
+  linkIf?: boolean,
+  href?: string,
+  children?: number | string | React.Element | Array<any>,
+  onClick?: Function
+};
 
-  static propTypes = {
-    style: PropTypes.object,
-    className: PropTypes.string,
-    linkIf: PropTypes.bool,
-    href: PropTypes.string,
-    children: PropTypes.node,
-    onClick: PropTypes.func
-  };
+export default class NavigationButton extends React.PureComponent {
+  props: Props;
+
+  static displayName = "Navigation.NavigationButton";
 
   static defaultProps = {
     linkIf: false

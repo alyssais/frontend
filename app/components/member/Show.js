@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import DocumentTitle from 'react-document-title';
 
@@ -11,35 +11,29 @@ import permissions from 'app/lib/permissions';
 
 const AVATAR_SIZE = 50;
 
-class Show extends React.PureComponent {
-  static displayName = "Member.Show";
+type Props = {
+  children: number | string | React.Element | Array<any>,
+  organizationMember?: {
+    uuid: string,
+    organization: {
+      slug: string,
+      permissions: { teamView: { allowed: boolean } }
+    },
+    user: {
+      id: string,
+      name: string,
+      email: string,
+      bot: boolean,
+      avatar: { url: string }
+    },
+    teams: { count: number }
+  }
+};
 
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    organizationMember: PropTypes.shape({
-      uuid: PropTypes.string.isRequired,
-      organization: PropTypes.shape({
-        slug: PropTypes.string.isRequired,
-        permissions: PropTypes.shape({
-          teamView: PropTypes.shape({
-            allowed: PropTypes.bool.isRequired
-          }).isRequired
-        }).isRequired
-      }).isRequired,
-      user: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        email: PropTypes.string.isRequired,
-        bot: PropTypes.bool.isRequired,
-        avatar: PropTypes.shape({
-          url: PropTypes.string.isRequired
-        }).isRequired
-      }).isRequired,
-      teams: PropTypes.shape({
-        count: PropTypes.number.isRequired
-      }).isRequired
-    })
-  };
+class Show extends React.PureComponent {
+  props: Props;
+
+  static displayName = "Member.Show";
 
   static contextTypes = {
     router: PropTypes.object.isRequired

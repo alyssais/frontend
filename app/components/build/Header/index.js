@@ -1,7 +1,7 @@
+/* @flow */
 /* global Buildkite, jQuery */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { RootContainer } from 'react-relay/classic';
 
@@ -17,46 +17,44 @@ import { shortCommit } from 'app/lib/commits';
 
 import Pipeline from './pipeline';
 
+type Props = {
+  build: {
+    number: number,
+    state: string,
+    source: string,
+    authorName?: string,
+    authorAvatar?: string,
+    authorUuid?: string,
+    project: {
+      name: string,
+      url: string,
+      slug: string,
+      public: boolean
+    },
+    account: {
+      name: string,
+      slug: string
+    },
+    rebuiltFrom?: {
+      url: string,
+      number: number
+    },
+    triggeredFrom?: {
+      uuid: string,
+      url: string,
+      name: string,
+      project: { name: string },
+      build: { number: number }
+    }
+  },
+  showRebuild?: boolean,
+  showProject?: boolean,
+  showOrganization?: boolean,
+  showUnknownEmailPrompt?: boolean
+};
+
 class BuildHeaderComponent extends React.PureComponent {
-  static propTypes = {
-    build: PropTypes.shape({
-      number: PropTypes.number.isRequired,
-      state: PropTypes.string.isRequired,
-      source: PropTypes.string.isRequired,
-      authorName: PropTypes.string,
-      authorAvatar: PropTypes.string,
-      authorUuid: PropTypes.string,
-      project: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        url: PropTypes.string.isRequired,
-        slug: PropTypes.string.isRequired,
-        public: PropTypes.bool.isRequired
-      }).isRequired,
-      account: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        slug: PropTypes.string.isRequired
-      }).isRequired,
-      rebuiltFrom: PropTypes.shape({
-        url: PropTypes.string.isRequired,
-        number: PropTypes.number.isRequired
-      }),
-      triggeredFrom: PropTypes.shape({
-        uuid: PropTypes.string.isRequired,
-        url: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        project: PropTypes.shape({
-          name: PropTypes.string.isRequired
-        }).isRequired,
-        build: PropTypes.shape({
-          number: PropTypes.number.isRequired
-        }).isRequired
-      })
-    }).isRequired,
-    showRebuild: PropTypes.bool,
-    showProject: PropTypes.bool,
-    showOrganization: PropTypes.bool,
-    showUnknownEmailPrompt: PropTypes.bool
-  };
+  props: Props;
 
   componentDidMount() {
     jQuery(ReactDOM.findDOMNode(this)).on('ajax:error', this._onAjaxError); // eslint-disable-line react/no-find-dom-node

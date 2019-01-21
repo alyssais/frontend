@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import DocumentTitle from 'react-document-title';
 
@@ -9,23 +9,17 @@ import Panel from 'app/components/shared/Panel';
 import Chooser from './chooser';
 import Row from './row';
 
+type Props = {
+  pipeline: {
+    name: string,
+    organization: Object,
+    teams: { edges?: Array<{ node: { id: string } }> }
+  },
+  relay: Object
+};
+
 class PipelineTeamIndex extends React.Component {
-  static propTypes = {
-    pipeline: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      organization: PropTypes.object.isRequired,
-      teams: PropTypes.shape({
-        edges: PropTypes.arrayOf(
-          PropTypes.shape({
-            node: PropTypes.shape({
-              id: PropTypes.string.isRequired
-            }).isRequired
-          }).isRequired
-        )
-      }).isRequired
-    }).isRequired,
-    relay: PropTypes.object.isRequired
-  };
+  props: Props;
 
   render() {
     return (

@@ -1,13 +1,15 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
+
+type Props = {
+  href: string,
+  children: number | string | React.Element | Array<any>
+};
 
 export default class Link extends React.PureComponent {
-  static displayName = "Footer.Link";
+  props: Props;
 
-  static propTypes = {
-    href: PropTypes.string.isRequired,
-    children: PropTypes.node.isRequired
-  };
+  static displayName = "Footer.Link";
 
   render() {
     return (

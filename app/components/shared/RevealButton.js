@@ -1,13 +1,15 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Button from './Button';
 
+type Props = {
+  caption?: number | string | React.Element | Array<any>,
+  children?: number | string | React.Element | Array<any>
+};
+
 class RevealButton extends React.Component {
-  static propTypes = {
-    caption: PropTypes.node,
-    children: PropTypes.node
-  };
+  props: Props;
 
   static defaultProps = {
     caption: 'Reveal'

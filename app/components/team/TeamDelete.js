@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 
 import Button from 'app/components/shared/Button';
@@ -7,18 +7,14 @@ import Panel from 'app/components/shared/Panel';
 
 import TeamDeleteMutation from 'app/mutations/TeamDelete';
 
+type Props = { team?: {
+  slug: string,
+  permissions: { teamDelete: Object },
+  organization: { slug: string }
+} };
+
 class TeamDelete extends React.Component {
-  static propTypes = {
-    team: PropTypes.shape({
-      slug: PropTypes.string.isRequired,
-      permissions: PropTypes.shape({
-        teamDelete: PropTypes.object.isRequired
-      }).isRequired,
-      organization: PropTypes.shape({
-        slug: PropTypes.string.isRequired
-      }).isRequired
-    })
-  };
+  props: Props;
 
   static contextTypes = {
     router: PropTypes.object.isRequired

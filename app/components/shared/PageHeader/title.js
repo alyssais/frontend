@@ -1,14 +1,16 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-class Title extends React.PureComponent {
-  static displayName = "PageHeader.Title";
+type Props = {
+  children: number | string | React.Element | Array<any>,
+  className?: string
+};
 
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    className: PropTypes.string
-  };
+class Title extends React.PureComponent {
+  props: Props;
+
+  static displayName = "PageHeader.Title";
 
   render() {
     return (

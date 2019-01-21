@@ -1,27 +1,25 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 
 import Panel from 'app/components/shared/Panel';
 import Emojify from 'app/components/shared/Emojify';
 
+type Props = { pipelineSchedule: {
+  uuid: string,
+  cronline: string,
+  label?: string,
+  commit?: string,
+  branch?: string,
+  enabled: boolean,
+  pipeline: {
+    slug: string,
+    organization: { slug: string }
+  }
+} };
+
 class Row extends React.PureComponent {
-  static propTypes = {
-    pipelineSchedule: PropTypes.shape({
-      uuid: PropTypes.string.isRequired,
-      cronline: PropTypes.string.isRequired,
-      label: PropTypes.string,
-      commit: PropTypes.string,
-      branch: PropTypes.string,
-      enabled: PropTypes.bool.isRequired,
-      pipeline: PropTypes.shape({
-        slug: PropTypes.string.isRequired,
-        organization: PropTypes.shape({
-          slug: PropTypes.string.isRequired
-        }).isRequired
-      }).isRequired
-    }).isRequired
-  };
+  props: Props;
 
   render() {
     const organization = this.props.pipelineSchedule.pipeline.organization;

@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import searchQuery from 'search-query-parser';
 
@@ -12,26 +12,28 @@ import Row from './row';
 const PAGE_SIZE = 50;
 const SEARCH_KEYWORDS = ['state', 'concurrency-group'];
 
-class Jobs extends React.PureComponent {
-  static propTypes = {
-    organization: PropTypes.object.isRequired,
-    relay: PropTypes.object.isRequired,
-    query: PropTypes.string,
-    onSuggestionClick: PropTypes.func
-  };
+type Props = {
+  organization: Object,
+  relay: Object,
+  query?: string,
+  onSuggestionClick?: Function
+};
 
+class Jobs extends React.PureComponent {
   state = {
     loading: false,
     error: null,
     paginating: false
   };
 
-  constructor(initialProps) {
+  constructor(initialProps: Props) {
     super(initialProps);
 
     // Only default "loading" to true if there's a default query
     this.state = { loading: !!initialProps.query };
   }
+
+  props: Props;
 
   componentDidMount() {
     const variables = this.parseSearchQuery(this.props.query);

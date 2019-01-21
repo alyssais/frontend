@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Button from 'app/components/shared/Button';
 import Emojify from 'app/components/shared/Emojify';
@@ -11,32 +11,28 @@ import permissions from 'app/lib/permissions';
 
 import AccessLevel from './access-level';
 
-export default class Row extends React.PureComponent {
-  static displayName = "Team.Pipelines.Row";
+type Props = {
+  teamPipeline: {
+    accessLevel?: string,
+    pipeline: {
+      name: string,
+      url: string,
+      repository: { url: string }
+    },
+    permissions?: {
+      teamPipelineUpdate: { allowed: boolean },
+      teamPipelineDelete: { allowed: boolean }
+    }
+  },
+  onAccessLevelChange: Function,
+  onRemoveClick: Function,
+  relay: Object
+};
 
-  static propTypes = {
-    teamPipeline: PropTypes.shape({
-      accessLevel: PropTypes.string,
-      pipeline: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        url: PropTypes.string.isRequired,
-        repository: PropTypes.shape({
-          url: PropTypes.string.isRequired
-        }).isRequired
-      }).isRequired,
-      permissions: PropTypes.shape({
-        teamPipelineUpdate: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired
-        }).isRequired,
-        teamPipelineDelete: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired
-        }).isRequired
-      })
-    }).isRequired,
-    onAccessLevelChange: PropTypes.func.isRequired,
-    onRemoveClick: PropTypes.func.isRequired,
-    relay: PropTypes.object.isRequired
-  };
+export default class Row extends React.PureComponent {
+  props: Props;
+
+  static displayName = "Team.Pipelines.Row";
 
   state = {
     savingNewAccessLevel: null,

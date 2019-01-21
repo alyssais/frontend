@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import shallowCompare from 'react-addons-shallow-compare';
 
@@ -12,22 +12,20 @@ import TeamSuggestion from './team-suggestion';
 
 import TeamPipelineCreateMutation from 'app/mutations/TeamPipelineCreate';
 
-class Chooser extends React.Component {
-  static displayName = "PipelineTeamIndex.Chooser";
+type Props = {
+  pipeline: {
+    id: string,
+    slug: string,
+    organization?: { teams?: { edges: Array<any> } }
+  },
+  relay: Object,
+  onChoose: Function
+};
 
-  static propTypes = {
-    pipeline: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired,
-      organization: PropTypes.shape({
-        teams: PropTypes.shape({
-          edges: PropTypes.array.isRequired
-        })
-      })
-    }).isRequired,
-    relay: PropTypes.object.isRequired,
-    onChoose: PropTypes.func.isRequired
-  };
+class Chooser extends React.Component {
+  props: Props;
+
+  static displayName = "PipelineTeamIndex.Chooser";
 
   state = {
     loading: false,

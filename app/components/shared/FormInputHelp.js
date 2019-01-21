@@ -1,8 +1,14 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const FormInputHelp = ({ className, children, ...props }) => {
+export type Props = {
+  className?: string,
+  children?: number | string | React.Element | Array<any>
+};
+
+const FormInputHelp = (props: Props) => {
+  const { className, children, ...props } = props;
   if (!children) {
     return null;
   }
@@ -15,11 +21,6 @@ const FormInputHelp = ({ className, children, ...props }) => {
       {children}
     </p>
   );
-};
-
-FormInputHelp.propTypes = {
-  className: PropTypes.string,
-  children: PropTypes.node
 };
 
 export default FormInputHelp;

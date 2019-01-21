@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import shallowCompare from 'react-addons-shallow-compare';
 
@@ -7,18 +7,20 @@ import Badge from 'app/components/shared/Badge';
 import BaseButton from 'app/components/shared/Button';
 import Icon from 'app/components/shared/Icon';
 
-class Button extends React.Component {
-  static displayName = "Menu.Button";
+type Props = {
+  label: string,
+  icon?: string,
+  count?: number,
+  badge?: string,
+  href?: string,
+  forceActive?: boolean,
+  link?: string
+};
 
-  static propTypes = {
-    label: PropTypes.string.isRequired,
-    icon: PropTypes.string,
-    count: PropTypes.number,
-    badge: PropTypes.string,
-    href: PropTypes.string,
-    forceActive: PropTypes.bool,
-    link: PropTypes.string
-  };
+class Button extends React.Component {
+  props: Props;
+
+  static displayName = "Menu.Button";
 
   static contextTypes = {
     router: PropTypes.object

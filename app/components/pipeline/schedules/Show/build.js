@@ -1,19 +1,19 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 
 import FriendlyTime from 'app/components/shared/FriendlyTime';
 import Panel from 'app/components/shared/Panel';
 
+type Props = { build: {
+  id: string,
+  url: string,
+  number: number,
+  createdAt: string
+} };
+
 class Build extends React.PureComponent {
-  static propTypes = {
-    build: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-      number: PropTypes.number.isRequired,
-      createdAt: PropTypes.string.isRequired
-    }).isRequired
-  };
+  props: Props;
 
   render() {
     return (

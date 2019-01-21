@@ -1,11 +1,11 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import autosize from 'autosize';
 
+type Props = { style?: Object };
+
 export default class AutosizingTextarea extends React.PureComponent {
-  static propTypes = {
-    style: PropTypes.object
-  };
+  props: Props;
 
   componentDidMount() {
     autosize(this._textarea);

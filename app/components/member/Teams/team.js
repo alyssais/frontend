@@ -1,19 +1,19 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 
 import TeamLabels from 'app/components/team/Labels';
 import Emojify from 'app/components/shared/Emojify';
 
-class Team extends React.PureComponent {
-  static displayName = "Member.Edit.TeamMemberships.Chooser.Team";
+type Props = { team: {
+  name: string,
+  description: string
+} };
 
-  static propTypes = {
-    team: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired
-    }).isRequired
-  };
+class Team extends React.PureComponent {
+  props: Props;
+
+  static displayName = "Member.Edit.TeamMemberships.Chooser.Team";
 
   render() {
     return (

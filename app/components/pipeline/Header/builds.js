@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 
 import BuildStateSwitcher from 'app/components/build/StateSwitcher';
@@ -7,14 +7,16 @@ import BuildStateSwitcher from 'app/components/build/StateSwitcher';
 import PusherStore from 'app/stores/PusherStore';
 import CentrifugeStore from 'app/stores/CentrifugeStore';
 
+type Props = {
+  pipeline: Object,
+  relay: Object,
+  className?: string,
+  buildState?: string,
+  testId?: string
+};
+
 class Builds extends React.Component {
-  static propTypes = {
-    pipeline: PropTypes.object.isRequired,
-    relay: PropTypes.object.isRequired,
-    className: PropTypes.string,
-    buildState: PropTypes.string,
-    testId: PropTypes.string
-  };
+  props: Props;
 
   componentDidMount() {
     PusherStore.on("websocket:event", this.handleWebsocketEvent);

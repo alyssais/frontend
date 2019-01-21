@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import DocumentTitle from 'react-document-title';
 
@@ -22,35 +22,29 @@ import OrganizationMemberSSOModeConstants from 'app/constants/OrganizationMember
 import GraphQLErrors from 'app/constants/GraphQLErrors';
 import TeamMemberRoleConstants from 'app/constants/TeamMemberRoleConstants';
 
+type Props = {
+  organization: {
+    name: string,
+    slug: string,
+    permissions?: { organizationInvitationCreate?: {
+      allowed: boolean,
+      message?: string
+    } },
+    teams?: {
+      count: number,
+      edges: Array<{ node: {
+        id: string,
+        slug: string,
+        isDefaultTeam: boolean
+      } }>
+    },
+    ssoProviders: { count: number }
+  },
+  relay: Object
+};
+
 class MemberNew extends React.PureComponent {
-  static propTypes = {
-    organization: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired,
-      permissions: PropTypes.shape({
-        organizationInvitationCreate: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired,
-          message: PropTypes.string
-        })
-      }),
-      teams: PropTypes.shape({
-        count: PropTypes.number.isRequired,
-        edges: PropTypes.arrayOf(
-          PropTypes.shape({
-            node: PropTypes.shape({
-              id: PropTypes.string.isRequired,
-              slug: PropTypes.string.isRequired,
-              isDefaultTeam: PropTypes.bool.isRequired
-            }).isRequired
-          })
-        ).isRequired
-      }),
-      ssoProviders: PropTypes.shape({
-        count: PropTypes.number.isRequired
-      }).isRequired
-    }).isRequired,
-    relay: PropTypes.object.isRequired
-  };
+  props: Props;
 
   static contextTypes = {
     router: PropTypes.object

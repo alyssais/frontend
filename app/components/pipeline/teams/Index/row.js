@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import { Link } from 'react-router';
 
@@ -16,36 +16,28 @@ import AccessLevel from 'app/components/team/Pipelines/access-level';
 import TeamPipelineUpdateMutation from 'app/mutations/TeamPipelineUpdate';
 import TeamPipelineDeleteMutation from 'app/mutations/TeamPipelineDelete';
 
-class Row extends React.Component {
-  static displayName = "PipelineTeamIndex.Row";
+type Props = {
+  teamPipeline: {
+    team: {
+      name: string,
+      slug: string,
+      description?: string,
+      members?: { count?: number },
+      pipelines?: { count?: number }
+    },
+    permissions?: {
+      teamPipelineUpdate: { allowed: boolean },
+      teamPipelineDelete: { allowed: boolean }
+    }
+  },
+  organization: { slug: string },
+  relay: Object
+};
 
-  static propTypes = {
-    teamPipeline: PropTypes.shape({
-      team: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        slug: PropTypes.string.isRequired,
-        description: PropTypes.string,
-        members: PropTypes.shape({
-          count: PropTypes.number
-        }),
-        pipelines: PropTypes.shape({
-          count: PropTypes.number
-        })
-      }).isRequired,
-      permissions: PropTypes.shape({
-        teamPipelineUpdate: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired
-        }).isRequired,
-        teamPipelineDelete: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired
-        }).isRequired
-      })
-    }).isRequired,
-    organization: PropTypes.shape({
-      slug: PropTypes.string.isRequired
-    }).isRequired,
-    relay: PropTypes.object.isRequired
-  };
+class Row extends React.Component {
+  props: Props;
+
+  static displayName = "PipelineTeamIndex.Row";
 
   state = {
     savingNewAccessLevel: null,

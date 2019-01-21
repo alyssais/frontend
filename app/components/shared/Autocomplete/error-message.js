@@ -1,14 +1,16 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-export default class ErrorMessage extends React.PureComponent {
-  static displayName = "Autocomplete.ErrorMessage";
+type Props = {
+  children: number | string | React.Element | Array<any>,
+  className?: string
+};
 
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    className: PropTypes.string
-  };
+export default class ErrorMessage extends React.PureComponent {
+  props: Props;
+
+  static displayName = "Autocomplete.ErrorMessage";
 
   render() {
     const classes = classNames(this.props.className, "px2 py2 dark-gray");

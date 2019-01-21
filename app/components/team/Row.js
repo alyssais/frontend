@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import classNames from 'classnames';
 
@@ -13,29 +13,21 @@ import Emojify from 'app/components/shared/Emojify';
 const maxAvatars = 4;
 const avatarSize = 30;
 
+type Props = { team: {
+  id: string,
+  name: string,
+  description?: string,
+  slug: string,
+  organization: { slug: string },
+  members: {
+    count: number,
+    edges: Array<{ node: Object }>
+  },
+  pipelines: { count: number }
+} };
+
 class TeamRow extends React.PureComponent {
-  static propTypes = {
-    team: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      description: PropTypes.string,
-      slug: PropTypes.string.isRequired,
-      organization: PropTypes.shape({
-        slug: PropTypes.string.isRequired
-      }).isRequired,
-      members: PropTypes.shape({
-        count: PropTypes.number.isRequired,
-        edges: PropTypes.arrayOf(
-          PropTypes.shape({
-            node: PropTypes.object.isRequired
-          }).isRequired
-        ).isRequired
-      }).isRequired,
-      pipelines: PropTypes.shape({
-        count: PropTypes.number.isRequired
-      }).isRequired
-    }).isRequired
-  };
+  props: Props;
 
   render() {
     const { team } = this.props;

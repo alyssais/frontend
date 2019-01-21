@@ -1,13 +1,12 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Typography from './typography';
 
-const Section = function(props) {
+export type Props = { children?: number | string | React.Element | Array<any> };
+
+const Section = function(props: Props) {
   return <div className="my4">{props.children}</div>;
-};
-Section.propTypes = {
-  children: PropTypes.node
 };
 
 // Useful when authoring our base CSS styles

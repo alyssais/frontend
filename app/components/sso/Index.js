@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+/* @flow */
 import React from 'react';
 import Relay from 'react-relay/classic';
 import DocumentTitle from 'react-document-title';
@@ -9,15 +9,17 @@ import Panel from 'app/components/shared/Panel';
 import PageHeader from 'app/components/shared/PageHeader';
 import Spinner from 'app/components/shared/Spinner';
 
+type Props = {
+  organization: {
+    name: string,
+    slug: string,
+    sso?: Object
+  },
+  relay: Object
+};
+
 class SSOIndex extends React.PureComponent {
-  static propTypes = {
-    organization: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired,
-      sso: PropTypes.object
-    }).isRequired,
-    relay: PropTypes.object.isRequired
-  };
+  props: Props;
 
   componentDidMount() {
     this.props.relay.forceFetch({ isMounted: true });

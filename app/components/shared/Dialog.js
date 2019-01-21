@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import styled from 'styled-components';
 
@@ -69,23 +69,23 @@ const DialogWrapper = styled.div.attrs({
   z-index: 1000;
 `;
 
-class Dialog extends React.Component {
-  static propTypes = {
-    children: PropTypes.node,
-    closeable: PropTypes.bool,
-    isOpen: PropTypes.bool,
-    onRequestClose: PropTypes.func,
-    onHide: PropTypes.func,
-    width: PropTypes.number
-  };
+type Props = {
+  children?: number | string | React.Element | Array<any>,
+  closeable?: boolean,
+  isOpen?: boolean,
+  onRequestClose?: Function,
+  onHide?: Function,
+  width?: number
+};
 
+class Dialog extends React.Component {
   static defaultProps = {
     closeable: true,
     isOpen: false,
     width: 500
   };
 
-  constructor(initialProps) {
+  constructor(initialProps: Props) {
     super(initialProps);
 
     let rendered = false;
@@ -100,6 +100,8 @@ class Dialog extends React.Component {
       visible
     };
   }
+
+  props: Props;
 
   componentDidMount() {
     document.documentElement.addEventListener('keydown', this.handleDocumentKeyDown, false);

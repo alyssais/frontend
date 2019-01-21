@@ -1,23 +1,23 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import classNames from 'classnames';
 
 import UserAvatar from './UserAvatar';
 
+type Props = {
+  user: {
+    name: string,
+    email: string,
+    avatar: { url: string }
+  },
+  align: 'left' | 'right',
+  className?: string,
+  style?: Object
+};
+
 class User extends React.PureComponent {
-  static propTypes = {
-    user: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      email: PropTypes.string.isRequired,
-      avatar: PropTypes.shape({
-        url: PropTypes.string.isRequired
-      }).isRequired
-    }).isRequired,
-    align: PropTypes.oneOf(['left', 'right']).isRequired,
-    className: PropTypes.string,
-    style: PropTypes.object
-  };
+  props: Props;
 
   static defaultProps = {
     align: 'left'

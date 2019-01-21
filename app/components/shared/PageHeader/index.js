@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import Title from './title';
@@ -8,11 +8,13 @@ import Description from './description';
 import Menu from './menu';
 import Icon from './icon';
 
+type Props = {
+  children: number | string | React.Element | Array<any>,
+  followedByTabs?: boolean
+};
+
 class PageHeader extends React.Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    followedByTabs: PropTypes.bool
-  };
+  props: Props;
 
   renderAffix(affixContent) {
     if (!affixContent) {

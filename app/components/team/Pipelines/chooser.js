@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import shallowCompare from 'react-addons-shallow-compare';
 
@@ -10,36 +10,24 @@ import permissions from 'app/lib/permissions';
 
 import FlashesStore from 'app/stores/FlashesStore';
 
-class Chooser extends React.Component {
-  static displayName = "Team.Pipelines.Chooser";
+type Props = {
+  team: {
+    id: string,
+    slug: string,
+    organization?: { pipelines?: { edges?: Array<{ node: { pipeline: {
+      name: string,
+      repository: { url: string }
+    } } }> } },
+    permissions: { teamPipelineCreate: Object }
+  },
+  relay: Object,
+  onChoose: Function
+};
 
-  static propTypes = {
-    team: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired,
-      organization: PropTypes.shape({
-        pipelines: PropTypes.shape({
-          edges: PropTypes.arrayOf(
-            PropTypes.shape({
-              node: PropTypes.shape({
-                pipeline: PropTypes.shape({
-                  name: PropTypes.string.isRequired,
-                  repository: PropTypes.shape({
-                    url: PropTypes.string.isRequired
-                  }).isRequired
-                }).isRequired
-              }).isRequired
-            }).isRequired
-          )
-        })
-      }),
-      permissions: PropTypes.shape({
-        teamPipelineCreate: PropTypes.object.isRequired
-      }).isRequired
-    }).isRequired,
-    relay: PropTypes.object.isRequired,
-    onChoose: PropTypes.func.isRequired
-  };
+class Chooser extends React.Component {
+  props: Props;
+
+  static displayName = "Team.Pipelines.Chooser";
 
   state = {
     loading: false,

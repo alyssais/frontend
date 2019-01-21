@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import { Link } from 'react-router';
 import classNames from 'classnames';
@@ -23,30 +23,26 @@ const GUIDES = ((guideRequire) =>
 const getEmojiForGuide = ({ emoji, title }) => emoji || `:${title.toLowerCase()}:`;
 const getSlugForGuide = ({ slug, title }) => slug || encodeURIComponent(title.toLowerCase());
 
+type Props = {
+  center: boolean,
+  location: {
+    hash: string,
+    pathname: string,
+    search: string
+  },
+  organization: {
+    name: string,
+    slug: string,
+    uuid?: string,
+    agentTokens?: { edges: Array<any> }
+  },
+  relay: Object,
+  title: string,
+  viewer?: { apiAccessTokens?: { edges: Array<any> } }
+};
+
 class QuickStart extends React.PureComponent {
-  static propTypes = {
-    center: PropTypes.bool.isRequired,
-    location: PropTypes.shape({
-      hash: PropTypes.string.isRequired,
-      pathname: PropTypes.string.isRequired,
-      search: PropTypes.string.isRequired
-    }).isRequired,
-    organization: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired,
-      uuid: PropTypes.string,
-      agentTokens: PropTypes.shape({
-        edges: PropTypes.array.isRequired
-      })
-    }).isRequired,
-    relay: PropTypes.object.isRequired,
-    title: PropTypes.string.isRequired,
-    viewer: PropTypes.shape({
-      apiAccessTokens: PropTypes.shape({
-        edges: PropTypes.array.isRequired
-      })
-    })
-  };
+  props: Props;
 
   static defaultProps = {
     center: true,

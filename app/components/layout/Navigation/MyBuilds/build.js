@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import styled from 'styled-components';
 
@@ -22,11 +22,13 @@ const BuildLink = styled.a.attrs({
   }
 `;
 
+type Props = {
+  build?: Object,
+  relay: Object
+};
+
 class BuildsDropdownBuild extends React.PureComponent {
-  static propTypes = {
-    build: PropTypes.object,
-    relay: PropTypes.object.isRequired
-  }
+  props: Props;
 
   componentDidMount() {
     PusherStore.on("websocket:event", this.handleWebsocketEvent);

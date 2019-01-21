@@ -1,12 +1,11 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
+type Props = { children: number | string | React.Element | Array<any> };
 
 export default class Header extends React.PureComponent {
-  static displayName = "Menu.Header";
+  props: Props;
 
-  static propTypes = {
-    children: PropTypes.node.isRequired
-  };
+  static displayName = "Menu.Header";
 
   render() {
     return (

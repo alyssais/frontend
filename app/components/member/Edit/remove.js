@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 
 import Button from 'app/components/shared/Button';
@@ -9,23 +9,19 @@ import FlashesStore from 'app/stores/FlashesStore';
 
 import OrganizationMemberDeleteMutation from 'app/mutations/OrganizationMemberDelete';
 
-class Remove extends React.PureComponent {
-  static displayName = "Member.Edit.Remove";
+type Props = {
+  viewer: { user: { id: string } },
+  organizationMember?: {
+    uuid: string,
+    permissions: Object,
+    user: { id: string }
+  }
+};
 
-  static propTypes = {
-    viewer: PropTypes.shape({
-      user: PropTypes.shape({
-        id: PropTypes.string.isRequired
-      }).isRequired
-    }).isRequired,
-    organizationMember: PropTypes.shape({
-      uuid: PropTypes.string.isRequired,
-      permissions: PropTypes.object.isRequired,
-      user: PropTypes.shape({
-        id: PropTypes.string.isRequired
-      }).isRequired
-    })
-  };
+class Remove extends React.PureComponent {
+  props: Props;
+
+  static displayName = "Member.Edit.Remove";
 
   static contextTypes = {
     router: PropTypes.object.isRequired

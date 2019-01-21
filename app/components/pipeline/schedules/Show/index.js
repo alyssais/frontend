@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import DocumentTitle from 'react-document-title';
 
@@ -16,63 +16,43 @@ import permissions from 'app/lib/permissions';
 
 import Build from './build';
 
+type Props = {
+  pipelineSchedule?: {
+    uuid: string,
+    cronline: string,
+    label?: string,
+    commit?: string,
+    branch?: string,
+    message?: string,
+    env?: Array<string>,
+    enabled: boolean,
+    failedMessage?: string,
+    failedAt?: string,
+    nextBuildAt?: string,
+    pipeline: {
+      slug: string,
+      organization: { slug: string },
+      permissions: { buildCreate: { allowed: boolean } }
+    },
+    builds: { edges?: Array<{ node: { id: string } }> },
+    createdBy: {
+      id: string,
+      name: string
+    },
+    ownedBy?: {
+      id: string,
+      name: string
+    },
+    permissions: {
+      pipelineScheduleUpdate: { allowed: boolean },
+      pipelineScheduleDelete: { allowed: boolean }
+    }
+  },
+  viewer: { user: { id: string } }
+};
+
 class Show extends React.Component {
-  static propTypes = {
-    pipelineSchedule: PropTypes.shape({
-      uuid: PropTypes.string.isRequired,
-      cronline: PropTypes.string.isRequired,
-      label: PropTypes.string,
-      commit: PropTypes.string,
-      branch: PropTypes.string,
-      message: PropTypes.string,
-      env: PropTypes.arrayOf(PropTypes.string),
-      enabled: PropTypes.bool.isRequired,
-      failedMessage: PropTypes.string,
-      failedAt: PropTypes.string,
-      nextBuildAt: PropTypes.string,
-      pipeline: PropTypes.shape({
-        slug: PropTypes.string.isRequired,
-        organization: PropTypes.shape({
-          slug: PropTypes.string.isRequired
-        }).isRequired,
-        permissions: PropTypes.shape({
-          buildCreate: PropTypes.shape({
-            allowed: PropTypes.bool.isRequired
-          }).isRequired
-        }).isRequired
-      }).isRequired,
-      builds: PropTypes.shape({
-        edges: PropTypes.arrayOf(
-          PropTypes.shape({
-            node: PropTypes.shape({
-              id: PropTypes.string.isRequired
-            }).isRequired
-          }).isRequired
-        )
-      }).isRequired,
-      createdBy: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired
-      }).isRequired,
-      ownedBy: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired
-      }),
-      permissions: PropTypes.shape({
-        pipelineScheduleUpdate: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired
-        }).isRequired,
-        pipelineScheduleDelete: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired
-        }).isRequired
-      }).isRequired
-    }),
-    viewer: PropTypes.shape({
-      user: PropTypes.shape({
-        id: PropTypes.string.isRequired
-      }).isRequired
-    }).isRequired
-  };
+  props: Props;
 
   static contextTypes = {
     router: PropTypes.object.isRequired

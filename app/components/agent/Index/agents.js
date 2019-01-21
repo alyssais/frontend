@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 import { second, seconds } from 'metrick/duration';
 import throttle from 'throttleit';
@@ -17,21 +17,19 @@ import AgentRow from './row';
 
 const PAGE_SIZE = 100;
 
-class Agents extends React.PureComponent {
-  static propTypes = {
-    organization: PropTypes.shape({
-      allAgents: PropTypes.shape({
-        count: PropTypes.number.isRequired
-      }),
-      agents: PropTypes.shape({
-        count: PropTypes.number.isRequired,
-        edges: PropTypes.array.isRequired
-      })
-    }).isRequired,
-    relay: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired
-  };
+type Props = {
+  organization: {
+    allAgents?: { count: number },
+    agents?: {
+      count: number,
+      edges: Array<any>
+    }
+  },
+  relay: Object,
+  location: Object
+};
 
+class Agents extends React.PureComponent {
   state = {
     loading: false,
     searchingRemotely: false,
@@ -40,12 +38,14 @@ class Agents extends React.PureComponent {
     defaultQuery: null
   };
 
-  constructor(initialProps) {
+  constructor(initialProps: Props) {
     super(initialProps);
 
     const defaultQuery = this.props.location.query.q !== undefined ? this.props.location.query.q : undefined;
     this.state = { defaultQuery: defaultQuery };
   }
+
+  props: Props;
 
   componentDidMount() {
     // We've marked the data requirements for this compoent with `@include(if:

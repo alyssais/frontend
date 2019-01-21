@@ -1,18 +1,20 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-class Suggestion extends React.Component {
-  static displayName = "AutocompleteField.Suggestion";
+type Props = {
+  children: number | string | React.Element | Array<any>,
+  selected: boolean,
+  suggestion: Object,
+  onMouseOver: Function,
+  onMouseDown: Function,
+  className?: string
+};
 
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    selected: PropTypes.bool.isRequired,
-    suggestion: PropTypes.object.isRequired,
-    onMouseOver: PropTypes.func.isRequired,
-    onMouseDown: PropTypes.func.isRequired,
-    className: PropTypes.string
-  };
+class Suggestion extends React.Component {
+  props: Props;
+
+  static displayName = "AutocompleteField.Suggestion";
 
   static childContextTypes = {
     autoCompletorSuggestion: PropTypes.object

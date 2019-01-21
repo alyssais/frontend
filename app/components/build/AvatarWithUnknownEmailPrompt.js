@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import Relay from 'react-relay/classic';
 
 import Button from 'app/components/shared/Button';
@@ -13,35 +13,25 @@ import FlashesStore from 'app/stores/FlashesStore';
 import EmailCreateMutation from 'app/mutations/EmailCreate';
 import NoticeDismissMutation from 'app/mutations/NoticeDismiss';
 
+type Props = {
+  build: { createdBy?: {
+    email?: string,
+    name?: string
+  } },
+  viewer: {
+    emails: { edges?: Array<{ node?: {
+      id?: string,
+      address?: string,
+      verified?: boolean
+    } }> },
+    githubAuthorizations: { count: number },
+    notice?: { dismissedAt?: string }
+  },
+  relay?: Object
+};
+
 class AvatarWithUnknownEmailPrompt extends React.PureComponent {
-  static propTypes = {
-    build: PropTypes.shape({
-      createdBy: PropTypes.shape({
-        email: PropTypes.string,
-        name: PropTypes.string
-      })
-    }).isRequired,
-    viewer: PropTypes.shape({
-      emails: PropTypes.shape({
-        edges: PropTypes.arrayOf(
-          PropTypes.shape({
-            node: PropTypes.shape({
-              id: PropTypes.string,
-              address: PropTypes.string,
-              verified: PropTypes.bool
-            })
-          })
-        )
-      }).isRequired,
-      githubAuthorizations: PropTypes.shape({
-        count: PropTypes.number.isRequired
-      }).isRequired,
-      notice: PropTypes.shape({
-        dismissedAt: PropTypes.string
-      })
-    }).isRequired,
-    relay: PropTypes.object
-  };
+  props: Props;
 
   state = {
     isAddingEmail: false,

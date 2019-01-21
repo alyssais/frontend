@@ -1,10 +1,9 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
+type Props = { children: number | string | React.Element | Array<any> };
 
 export default class PageWithContainer extends React.PureComponent {
-  static propTypes = {
-    children: PropTypes.node.isRequired
-  };
+  props: Props;
 
   render() {
     return (

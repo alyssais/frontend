@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+/* @flow */
 import React from 'react';
 import Relay from 'react-relay/classic';
 import classNames from 'classnames';
@@ -7,12 +7,10 @@ import Icon from 'app/components/shared/Icon';
 import PageHeader from 'app/components/shared/PageHeader';
 import TabControl from 'app/components/shared/TabControl';
 
+type Props = { organization: { slug: string } };
+
 class BillingHeader extends React.PureComponent {
-  static propTypes = {
-    organization: PropTypes.shape({
-      slug: PropTypes.string.isRequired
-    }).isRequired
-  };
+  props: Props;
 
   render() {
     return (

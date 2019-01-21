@@ -1,19 +1,18 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import update from 'react-addons-update';
 import classNames from 'classnames';
 
+type Props = {
+  size?: number | string,
+  className?: string,
+  style?: Object,
+  color?: boolean,
+  fadeIn?: boolean
+};
+
 export default class Spinner extends React.PureComponent {
-  static propTypes = {
-    size: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string
-    ]),
-    className: PropTypes.string,
-    style: PropTypes.object,
-    color: PropTypes.bool,
-    fadeIn: PropTypes.bool
-  };
+  props: Props;
 
   static defaultProps = {
     size: 20,

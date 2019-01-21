@@ -1,18 +1,18 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
+type Props = {
+  user: {
+    name: string,
+    avatar?: { url: string }
+  },
+  className?: string,
+  style?: Object
+};
+
 export default class UserAvatar extends React.PureComponent {
-  static propTypes = {
-    user: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      avatar: PropTypes.shape({
-        url: PropTypes.string.isRequired
-      })
-    }).isRequired,
-    className: PropTypes.string,
-    style: PropTypes.object
-  };
+  props: Props;
 
   render() {
     return (

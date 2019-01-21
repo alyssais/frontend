@@ -1,5 +1,5 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Chooser from 'app/components/shared/Chooser';
 import Dropdown from 'app/components/shared/Dropdown';
@@ -8,21 +8,19 @@ import PermissionDescription from 'app/components/shared/PermissionDescription';
 
 import TeamMemberRoleConstants from 'app/constants/TeamMemberRoleConstants';
 
-export default class MemberRole extends React.PureComponent {
-  static displayName = "Team.Pipelines.Role";
+type Props = {
+  teamMember: {
+    role: string,
+    permissions?: { teamMemberUpdate: { allowed: boolean } }
+  },
+  onRoleChange: Function,
+  savingNewRole?: string
+};
 
-  static propTypes = {
-    teamMember: PropTypes.shape({
-      role: PropTypes.string.isRequired,
-      permissions: PropTypes.shape({
-        teamMemberUpdate: PropTypes.shape({
-          allowed: PropTypes.bool.isRequired
-        }).isRequired
-      })
-    }).isRequired,
-    onRoleChange: PropTypes.func.isRequired,
-    savingNewRole: PropTypes.string
-  };
+export default class MemberRole extends React.PureComponent {
+  props: Props;
+
+  static displayName = "Team.Pipelines.Role";
 
   render() {
     if (this.props.teamMember.permissions.teamMemberUpdate.allowed) {

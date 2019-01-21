@@ -1,22 +1,26 @@
+/* @flow */
 /* global module */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import { storiesOf } from '@storybook/react';
 
-const Example = function(props) {
+export type ExampleProps = {
+  children?: number | string | React.Element | Array<any>,
+  border?: string
+};
+
+const Example = function(props: ExampleProps) {
   return <div className={`my3 border-left border-${props.border || "gray"} pl4 py2`}>{props.children}</div>;
 };
-Example.propTypes = { children: PropTypes.node, border: PropTypes.string };
+export type SectionProps = { children?: number | string | React.Element | Array<any> };
 
-const Section = function(props) {
+const Section = function(props: SectionProps) {
   return (
     <div className="max-width-2">
       {props.children}
     </div>
   );
 };
-Section.propTypes = { children: PropTypes.node };
 
 const combinations = () => (
   <Section>
